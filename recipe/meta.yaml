@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   # We need to pass --with-cython to force cython to regenerate the .c file
-  script: {{ PYTHON }} -m pip install . --global-option="--with-cython" --no-deps --ignore-installed --no-cache-dir -vvv
+  script: {{ PYTHON }} -m pip install . --global-option="--with-cython" -vv
 
 requirements:
   build:
