@@ -1,5 +1,5 @@
 {% set name = "fastrlock" %}
-{% set version = "0.7" %}
+{% set version = "0.8" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 3a18f8c890014eca1fb0e7af4dab5927b53187e1706278da75aa9032ae8ddb7b
+  sha256: 9cc100ed0924b32173d7de705a82fdf1257cdf60af1952a13f64759307b40931
 
 build:
   number: 0
