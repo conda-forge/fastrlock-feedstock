@@ -10,7 +10,7 @@ source:
   sha256: 9cc100ed0924b32173d7de705a82fdf1257cdf60af1952a13f64759307b40931
 
 build:
-  number: 2
+  number: 3
   # We need to pass --with-cython to force cython to regenerate the .c file
   script: {{ PYTHON }} -m pip install . --global-option="--with-cython" -vv
 
