@@ -1,5 +1,5 @@
 {% set name = "fastrlock" %}
-{% set version = "0.8" %}
+{% set version = "0.8.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 9cc100ed0924b32173d7de705a82fdf1257cdf60af1952a13f64759307b40931
+  sha256: 644ec9215cf9c4df8028d8511379a15d9c1af3e16d80e47f1b6fdc6ba118356a
 
 build:
-  number: 3
+  number: 0
   # We need to pass --with-cython to force cython to regenerate the .c file
   script: {{ PYTHON }} -m pip install . --global-option="--with-cython" -vv
 
