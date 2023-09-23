@@ -11,3 +11,4 @@ provider:
   linux_ppc64le: default
 conda_build:
   pkg_format: '2'
+test: native_and_emulated
