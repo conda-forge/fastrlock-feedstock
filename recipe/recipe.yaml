@@ -1,44 +1,46 @@
-{% set name = "fastrlock" %}
-{% set version = "0.8.3" %}
+context:
+  name: fastrlock
+  version: 0.8.3
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
   sha256: 4af6734d92eaa3ab4373e6c9a1dd0d5ad1304e172b1521733c6c3b3d73c8fa5d
 
 build:
-  number: 0
   # We need to pass --with-cython to force cython to regenerate the .c file
-  script: {{ PYTHON }} -m pip install . --global-option="--with-cython" -vv
+  number: 1
+  script: ${{ PYTHON }} -m pip install . --global-option="--with-cython" -vv
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython                                 # [build_platform != target_platform]
-    - {{ compiler("c") }}
-    - {{ stdlib("c") }}
-    - {{ compiler("cxx") }}
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cython
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler("cxx") }}
   host:
     - python
     - pip
+    - setuptools
     - cython
   run:
     - python
 
-test:
-  imports:
-    - fastrlock
+tests:
+  - python:
+      imports:
+        - fastrlock
+      pip_check: false
 
 about:
-  home: https://github.com/scoder/fastrlock
   license: MIT
-  license_family: MIT
   license_file: LICENSE
   summary: This is a C-level implementation of a fast, re-entrant, optimistic lock for CPython
   description: |
@@ -58,7 +60,8 @@ about:
     or even faster than the lock provided by this package, when called through
     the Python API. FastRLock is still faster also on these systems when called
     through its Cython API.
-  dev_url: https://github.com/scoder/fastrlock
+  homepage: https://github.com/scoder/fastrlock
+  repository: https://github.com/scoder/fastrlock
 
 extra:
   recipe-maintainers:
