@@ -28,7 +28,6 @@ or even faster than the lock provided by this package, when called through
 the Python API. FastRLock is still faster also on these systems when called
 through its Cython API.
 
-
 Current build status
 ====================
 
