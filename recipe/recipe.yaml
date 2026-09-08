@@ -11,9 +11,15 @@ source:
   sha256: 4af6734d92eaa3ab4373e6c9a1dd0d5ad1304e172b1521733c6c3b3d73c8fa5d
 
 build:
-  # We need to pass --with-cython to force cython to regenerate the .c file
-  number: 2
-  script: ${{ PYTHON }} -m pip install . --global-option="--with-cython" -vv
+  number: 3
+  script:
+    # Force Cython to regenerate the .c file from the .pyx rather than reusing
+    # the stale pre-generated one shipped in the sdist. setup.py's --with-cython
+    # flag used to be passed via pip's --global-option, which pip has removed,
+    # so instead delete the pre-generated source: setup.py then falls back to
+    # cythonizing (see the "generated sources not available" branch).
+    - ${{ PYTHON }} -c "import pathlib; pathlib.Path('fastrlock/rlock.c').unlink(missing_ok=True)"
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
