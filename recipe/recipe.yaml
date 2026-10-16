@@ -1,6 +1,6 @@
 context:
   name: fastrlock
-  version: 0.8.3
+  version: "0.8.4"
 
 package:
   name: ${{ name|lower }}
@@ -8,10 +8,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 4af6734d92eaa3ab4373e6c9a1dd0d5ad1304e172b1521733c6c3b3d73c8fa5d
+  sha256: 60273f82753f59440c3ae55bdf89adeee028535cf700183b317feab708b38686
 
 build:
-  number: 3
+  number: 0
   script:
     # Force Cython to regenerate the .c file from the .pyx rather than reusing
     # the stale pre-generated one shipped in the sdist. setup.py's --with-cython
